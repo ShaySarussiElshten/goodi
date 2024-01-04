@@ -1,0 +1,25 @@
+version: '3'
+services:
+  db:
+    image: mongo:latest
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - 27017:27017
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - MONGO_URL=mongodb://db:27017/diceApp

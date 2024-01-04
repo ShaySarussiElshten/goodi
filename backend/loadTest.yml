@@ -1,0 +1,17 @@
+config:
+  target: 'http://localhost:60100' # Replace with your server URL
+  phases:
+    - duration: 60 # Test duration in seconds
+      arrivalRate: 10000 # Number of new virtual users per second
+  variables:
+    userId: # Custom variable for user ID
+      exec: "return Math.floor(Math.random() * 1000) + 1;" # Random user ID between 1 and 1000
+
+scenarios:
+  - flow:
+      - post:
+          url: "/dice/throw/{{ userId }}" # Using dynamic userId in the URL
+          headers:
+            Content-Type: "application/json"
+          json: # If you need to send a JSON payload with the POST request
+            key: "value" # Replace with actual payload as required

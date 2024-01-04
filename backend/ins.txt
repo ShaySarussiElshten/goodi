@@ -1,0 +1,41 @@
+ 
+ /////
+
+ docker-compose up --build 
+
+
+ ////////
+ 
+ 
+ minikube config set memory 7000
+
+ minikube delete --all --purge 
+
+ minikube start 
+
+ minikube start --alsologtostderr -v=7
+
+
+ //docker push last img :
+
+docker tag dice-app-app shay88/dice-app-app:latest
+
+docker push shay88/dice-app-app:latest 
+
+when you push the docker image 
+dont forget to push the docker hub..!!!
+
+
+// kubectl:
+
+
+kubectl apply -f dice-app-deployment.yaml      
+kubectl apply -f dice-app-service.yaml
+
+kubectl apply -f mongo-deployment.yaml      
+kubectl apply -f mongo-service.yaml   
+kubectl apply -f redis-deployment.yaml
+kubectl apply -f redis-service.yaml
+
+
+
